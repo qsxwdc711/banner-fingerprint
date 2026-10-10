@@ -12,6 +12,8 @@
 - [x] Add rules/fingerprints.json, samples/banners.json, Dockerfile, compose.yaml, ignore files, Chinese README and CI verification.
 - [x] Run `go test ./...`, `go vet ./...`, `gofmt -l .`, Linux static builds and `docker compose config --quiet`. Run the supplied sample through the actual server/client and compare all result fields.
 - [x] Review protocol boundaries, error paths and rendered container configuration; correct proven issues and repeat affected checks.
-- [ ] Inspect staged files, commit, create a public GitHub repository, push and compare local HEAD with remote main. Record actual validation and any environment limitation in README before final submission.
+- [x] Inspect staged files, commit, create a public GitHub repository, push and compare local HEAD with remote main. Record actual validation and any environment limitation in README before final submission.
+
+Delivery: https://github.com/qsxwdc711/banner-fingerprint (public, main). Implementation commit `1f6dfdd3bbf0f757e3c90db1de7ddbe80b4655e1` passed Linux race tests, vet, Docker image builds and actual Compose server/client integration in https://github.com/qsxwdc711/banner-fingerprint/actions/runs/38035997071 . The final follow-up commit records this evidence without changing executable code.
 
 Parallel ownership: engine agent owns internal/fingerprint and rules; API agent owns cmd and internal/httpapi; deployment agent owns container assets, sample data, README and workflow. Root owns integration, release validation and GitHub publication.

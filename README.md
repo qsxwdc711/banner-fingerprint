@@ -156,7 +156,7 @@ go run ./cmd/client --input samples/banners.json --server http://127.0.0.1:8080 
 
 `--timeout` 为请求总超时；client 遇到本地文件错误、服务错误或非 2xx 响应时返回非零状态码，结果以 JSON 打印到 stdout，错误到 stderr。Windows 的 Go race 检测需要可用的 C 编译器；CI 使用 Linux 执行 `go test -race ./...`。
 
-GitHub Actions 自动运行 race 测试、`go vet`、Compose 配置检查，并实际构建和启动 server、运行 client，验证批量输出和未知结果。首次推送后的实际执行状态以 Actions 页面为准。
+GitHub Actions 自动运行 race 测试、`go vet`、Compose 配置检查，并实际构建和启动 server、运行 client，验证批量输出和未知结果。实现提交 `1f6dfdd` 的 [Linux 和 Docker Compose 验证已全部通过](https://github.com/qsxwdc711/banner-fingerprint/actions/runs/38035997071)：Go 1.27.2 下全部五个包的 race 测试通过，两种最终镜像构建成功，server 健康后 client 成功返回 20 条结果。完整命令和输出保存在该工作流日志中。
 
 交付前在本机 Go 1.23.5 环境实际通过 `go test -timeout 30s ./...`、`go vet ./...`、格式检查、Linux amd64 静态交叉编译和 Compose 配置校验。独立编译的 server、内置健康检查与 client 已完成真实 HTTP 调用，20 条样例的完整输出保存在 `samples/results.expected.json`；集成测试逐字段核对题目展示的前 7 条结果，并检查数组顺序及两条 unknown。Windows 本机的 race 可执行文件遇到现有 C 工具链运行错误，Linux race 由 CI 验证。
 
