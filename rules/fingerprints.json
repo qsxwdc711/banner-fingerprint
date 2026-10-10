@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "name": "ssh-openssh",
+      "protocol": "SSH",
+      "target": "ssh_software",
+      "pattern": "(?i)^OpenSSH(?:_([0-9][A-Za-z0-9._+-]*))?(?:[ \\t]|$)",
+      "product": "OpenSSH",
+      "version_group": 1,
+      "confidence": 0.95
+    },
+    {
+      "name": "ssh-dropbear",
+      "protocol": "SSH",
+      "target": "ssh_software",
+      "pattern": "(?i)^dropbear(?:_([0-9][A-Za-z0-9._+-]*))?(?:[ \\t]|$)",
+      "product": "Dropbear",
+      "version_group": 1,
+      "confidence": 0.95
+    },
+    {
+      "name": "ssh-generic",
+      "protocol": "SSH",
+      "target": "banner",
+      "pattern": "^SSH-(?:1\\.99|2\\.0)-[^\\r\\n]+$",
+      "product": "",
+      "version_group": 0,
+      "confidence": 0.8
+    },
+    {
+      "name": "http-nginx",
+      "protocol": "HTTP",
+      "target": "http_server",
+      "pattern": "(?im)(?:^|[ \\t;(])nginx(?:/([0-9][A-Za-z0-9._+-]*))?(?:$|[ \\t;(])",
+      "product": "nginx",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "http-apache",
+      "protocol": "HTTP",
+      "target": "http_server",
+      "pattern": "(?im)(?:^|[ \\t;(])Apache(?:/([0-9][A-Za-z0-9._+-]*))?(?:$|[ \\t;(])",
+      "product": "Apache",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "http-jetty",
+      "protocol": "HTTP",
+      "target": "http_server",
+      "pattern": "(?im)(?:^|[ \\t;])Jetty(?:[/(]([0-9][A-Za-z0-9._+-]*))?(?:$|[) \\t;])",
+      "product": "Jetty",
+      "version_group": 1,
+      "confidence": 0.85
+    },
+    {
+      "name": "http-iis",
+      "protocol": "HTTP",
+      "target": "http_server",
+      "pattern": "(?im)(?:^|[ \\t;])Microsoft-IIS(?:/([0-9][A-Za-z0-9._+-]*))?(?:$|[ \\t;])",
+      "product": "Microsoft-IIS",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "http-generic",
+      "protocol": "HTTP",
+      "target": "banner",
+      "pattern": "(?i)^(?:HTTP/(?:1\\.[01]|2(?:\\.0)?|3(?:\\.0)?) [0-9]{3}(?:[ \\t]|$)|Server:)",
+      "product": "",
+      "version_group": 0,
+      "confidence": 0.7
+    },
+    {
+      "name": "mysql-mariadb",
+      "protocol": "MySQL",
+      "target": "mysql_version",
+      "pattern": "(?i)^(?:5\\.5\\.5-)?([0-9]+(?:\\.[0-9]+){1,3})-MariaDB(?:[ -]|$)",
+      "product": "MariaDB",
+      "version_group": 1,
+      "confidence": 0.95
+    },
+    {
+      "name": "mysql-generic",
+      "protocol": "MySQL",
+      "target": "mysql_version",
+      "pattern": "^([0-9]+(?:\\.[0-9]+){1,3})(?:[-+ ].*|$)",
+      "product": "MySQL",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "redis-info-version",
+      "protocol": "Redis",
+      "target": "banner",
+      "pattern": "(?m)^redis_version:([0-9][A-Za-z0-9._+-]*)\\r?$",
+      "product": "Redis",
+      "version_group": 1,
+      "confidence": 0.95
+    },
+    {
+      "name": "redis-pong",
+      "protocol": "Redis",
+      "target": "banner",
+      "pattern": "^\\+PONG$",
+      "product": "Redis",
+      "version_group": 0,
+      "confidence": 0.7
+    },
+    {
+      "name": "redis-auth",
+      "protocol": "Redis",
+      "target": "banner",
+      "pattern": "^-(?:NOAUTH Authentication required\\.?|WRONGPASS invalid username-password pair or user is disabled\\.?)$",
+      "product": "Redis",
+      "version_group": 0,
+      "confidence": 0.7
+    },
+    {
+      "name": "redis-command-error",
+      "protocol": "Redis",
+      "target": "banner",
+      "pattern": "^-ERR (?:wrong number of arguments for '[^'\\r\\n]+' command|unknown command '[^'\\r\\n]+'(?:,.*)?|unknown command `[^`\\r\\n]+`(?:,.*)?)$",
+      "product": "Redis",
+      "version_group": 0,
+      "confidence": 0.7
+    },
+    {
+      "name": "redis-protected-mode",
+      "protocol": "Redis",
+      "target": "banner",
+      "pattern": "^-DENIED Redis is running in protected mode(?:[ .].*)?$",
+      "product": "Redis",
+      "version_group": 0,
+      "confidence": 0.8
+    },
+    {
+      "name": "ftp-proftpd",
+      "protocol": "FTP",
+      "target": "banner",
+      "pattern": "(?im)^220[- ][^\\r\\n]*?\\bProFTPD(?:[ /]([0-9][A-Za-z0-9._+-]*))?(?:[ \\t()\\r]|$)",
+      "product": "ProFTPD",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "ftp-vsftpd",
+      "protocol": "FTP",
+      "target": "banner",
+      "pattern": "(?im)^220[- ][^\\r\\n]*?\\bvsFTPd(?:[ /]([0-9][A-Za-z0-9._+-]*))?(?:[ \\t()\\r]|$)",
+      "product": "vsFTPd",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "ftp-pureftpd",
+      "protocol": "FTP",
+      "target": "banner",
+      "pattern": "(?im)^220[- ][^\\r\\n]*?\\bPure-FTPd(?:[ /]([0-9][A-Za-z0-9._+-]*))?(?:[ \\t()\\r]|$)",
+      "product": "Pure-FTPd",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "ftp-filezilla",
+      "protocol": "FTP",
+      "target": "banner",
+      "pattern": "(?im)^220[- ][^\\r\\n]*?\\bFileZilla Server(?:[ /]([0-9][A-Za-z0-9._+-]*))?(?:[ \\t()\\r]|$)",
+      "product": "FileZilla Server",
+      "version_group": 1,
+      "confidence": 0.9
+    },
+    {
+      "name": "ftp-generic",
+      "protocol": "FTP",
+      "target": "banner",
+      "pattern": "(?im)^220[- ][^\\r\\n]*?\\bFTP(?:[ \\r-]|$)",
+      "product": "",
+      "version_group": 0,
+      "confidence": 0.7
+    }
+  ],
+  "os_hints": [
+    {"pattern": "(?i)\\bUbuntu\\b", "hint": "Ubuntu"},
+    {"pattern": "(?i)\\bDebian\\b", "hint": "Debian"},
+    {"pattern": "(?i)\\bFreeBSD\\b", "hint": "FreeBSD"},
+    {"pattern": "(?i)\\bOpenBSD\\b", "hint": "OpenBSD"},
+    {"pattern": "(?i)\\bCentOS\\b", "hint": "CentOS"},
+    {"pattern": "(?i)\\bAlpine\\b", "hint": "Alpine"},
+    {"pattern": "(?i)\\b(?:Windows|Win32|Win64)\\b", "hint": "Windows"}
+  ]
+}
